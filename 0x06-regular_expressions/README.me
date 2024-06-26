@@ -1,0 +1,25 @@
+
+### 3. `match_school.rb`
+Create the Ruby script `match_school.rb` with the following content:
+
+```ruby
+#!/usr/bin/env ruby
+
+# Check if the correct number of arguments is provided
+if ARGV.length != 1
+  puts "Usage: ./match_school.rb <string>"
+  exit 1
+end
+
+input_string = ARGV[0]
+
+# Define the regular expression to match "School"
+regex = /School/
+
+# Check if the input string matches the regular expression
+if input_string =~ regex
+  puts "Match found: #{input_string}"
+else
+  puts "No match found"
+end
+
