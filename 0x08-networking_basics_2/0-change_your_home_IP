@@ -1,22 +1,9 @@
 #!/usr/bin/env bash
-# This script configures DNS resolution by modifying the /etc/hosts file.
-# It ensures that localhost resolves to 127.0.0.2 and facebook.com resolves to 8.8.8.8.
+# changes the following domain resolve ips
+#   localhost from 127.0.0.1 to 127.0.0.2
+#   facebook.com from 157.240.11.35 to 8.8.8.8
 
-# Add or update the localhost entry to resolve to 127.0.0.2
-if grep -q "^127.0.0.2\s\+localhost" /etc/hosts; then
-    echo "localhost entry already configured."
-else
-    echo "Configuring localhost to resolve to 127.0.0.2..."
-    echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts > /dev/null
-fi
-
-# Add or update the facebook.com entry to resolve to 8.8.8.8
-if grep -q "^8.8.8.8\s\+facebook.com" /etc/hosts; then
-    echo "facebook.com entry already configured."
-else
-    echo "Configuring facebook.com to resolve to 8.8.8.8..."
-    echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
-fi
-
-echo "DNS configuration complete."
-
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.2		localhost" > ~/hosts.new
+echo "8.8.8.8		facebook.com" >> ~/hosts.new
+cp -f ~/hosts.new /etc/hosts
